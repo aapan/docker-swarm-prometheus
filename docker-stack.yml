@@ -17,7 +17,7 @@ services:
       - '--collector.filesystem.ignored-mount-points=^/(sys|proc|dev|host|etc)($$|/)'
       - '--no-collector.ipvs'
     networks:
-      - scrapy-network
+      - prometheus-network
     deploy:
       mode: global
       resources:
@@ -36,7 +36,7 @@ services:
     ports:
       - '8080:8080'
     networks:
-      - scrapy-network
+      - prometheus-network
     deploy:
       mode: global
       restart_policy:
@@ -51,7 +51,7 @@ services:
     ports:
       - '9090:9090'
     networks:
-      - scrapy-network
+      - prometheus-network
     deploy:
       placement:
         constraints: [node.role == manager]
@@ -73,13 +73,13 @@ services:
     ports:
       - '3000:3000'
     networks:
-      - scrapy-network
+      - prometheus-network
     deploy:
       placement:
         constraints: [node.role == manager]
 
 networks:
-  scrapy-network:
+  prometheus-network:
 
 volumes:
   grafana_data:
